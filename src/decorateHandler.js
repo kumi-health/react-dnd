@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Disposable, CompositeDisposable, SerialDisposable } from 'disposables';
 import shallowEqual from './utils/shallowEqual';
 import shallowEqualScalar from './utils/shallowEqualScalar';
+import equalArray from './utils/equalArray'
 import isPlainObject from 'lodash/lang/isPlainObject';
 import invariant from 'invariant';
 import bindConnector from './bindConnector';
@@ -85,7 +86,8 @@ export default function decorateHandler({
     }
 
     receiveType(type) {
-      if (type === this.currentType) {
+      if (type === this.currentType || 
+          Array.isArray(type) && Array.isArray(this.currentType) && equalArray(type, this.currentType)) {
         return;
       }
 

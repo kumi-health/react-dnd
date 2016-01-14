@@ -67,7 +67,7 @@ const cardTarget = {
   }
 };
 
-@DropTarget(ItemTypes.CARD, cardTarget, connect => ({
+@DropTarget((props) => ([ItemTypes.CARD]), cardTarget, connect => ({
   connectDropTarget: connect.dropTarget()
 }))
 @DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
